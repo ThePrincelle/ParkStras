@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ParkStrasApp: App {
+    var network = Network()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(network)
         }
     }
 }
