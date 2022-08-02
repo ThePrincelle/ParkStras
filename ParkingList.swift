@@ -51,9 +51,9 @@ struct ParkingList: View {
                     } else {
                         List(parkings) {parking in
                             NavigationLink {
-                                ParkingView(parking: parking)
+                                ParkingView(parking: parking, sourcePosition: manualPosition != nil ? manualPosition : locationManager?.lastUserPosition)
                             } label: {
-                                ParkingRow(parking: parking, locationManager: locationManager)
+                                ParkingRow(parking: parking, sourcePosition: manualPosition != nil ? manualPosition : locationManager?.lastUserPosition)
                             }.swipeActions(allowsFullSwipe: false) {
                                 Button {
                                     navigate.navigateToParking(parking: parking)

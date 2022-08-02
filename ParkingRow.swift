@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ParkingRow: View {
     var parking: Parking
-    var locationManager: LocationManager?
+    var sourcePosition: Position?
     
     @StateObject var directions: Directions = Directions()
     
@@ -20,10 +20,10 @@ struct ParkingRow: View {
                     .font(.headline)
                     .padding(.bottom, 0.1)
                 
-                if (locationManager != nil && locationManager?.lastUserPosition != nil) {
+                if (sourcePosition != nil) {
                     Text(directions.directionsInfos != "" ? directions.directionsInfos : parking.getFormattedAddress())
                         .font(.subheadline).onAppear {
-                            directions.getDirectionsInfos(parking: parking, lastUserPosition: locationManager?.lastUserPosition)
+                            directions.getDirectionsInfos(parking: parking, sourcePosition: sourcePosition, returnAddressIfFailure: true)
                         }
                 } else {
                     Text("\(parking.getFormattedAddress())")

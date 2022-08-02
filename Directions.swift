@@ -11,37 +11,82 @@ import MapKit
 class Directions: ObservableObject {
     @Published var directionsInfos: String = ""
     
-    func getDirectionsInfos(parking: Parking, lastUserPosition: Position?) {
-        if (lastUserPosition != nil) {
-            directionsInfos = "🚙 Calcul en cours..."
+    func getDirectionsInfos(parking: Parking, sourcePosition: Position?, returnAddressIfFailure: Bool = true) {
+        if (sourcePosition != nil) {
             let request = MKDirections.Request()
             
             // Default to Strasbourg center
             request.source = MKMapItem(
-                placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lastUserPosition?.lat ?? 48.5734053, longitude: lastUserPosition?.lng ?? 7.7521113)))
+                placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourcePosition?.lat ?? 48.5734053, longitude: sourcePosition?.lng ?? 7.7521113)))
             
             request.destination = MKMapItem(
                 placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: parking.position.lat, longitude: parking.position.lng)))
             
-            request.transportType = MKDirectionsTransportType.automobile
-            request.requestsAlternateRoutes = false
+            //request.transportType = MKDirectionsTransportType.automobile
+            //request.requestsAlternateRoutes = true
             
             let directions = MKDirections(request: request)
-            var res = ""
+            
             directions.calculate { response, error in
-                if let route = response?.routes.first {
-                    let distance = Measurement(value: route.distance, unit: UnitLength.meters).formatted()
-                    let eta = Measurement(value: route.expectedTravelTime, unit: UnitDuration.seconds).formatted()
-                    res = "\(distance)\n🚙 \(eta)"
-                } else {
-                    res = "Unable to calculate ETA"
+                if let response = response, let route = response.routes.first {
+                    
+                    var distanceCar: Measurement<UnitLength>? = nil
+                    var etaCar: String? = nil
+                    
+                    var distanceWalking: Measurement<UnitLength>? = nil
+                    var etaWalking: String? = nil
+                    
+                    response.routes.forEach { item in
+                        if item.transportType == .walking && item.distance < 3500 && distanceWalking == nil && etaWalking == nil {
+                            //print("WALKING!")
+                            distanceWalking = Measurement(value: route.distance, unit: UnitLength.meters)
+                            etaWalking = "\(String(format: "%.0f", round(route.expectedTravelTime / 60))) min"
+                        }
+                        
+                        if item.transportType == .automobile && distanceCar == nil && etaCar == nil {
+                            //print("DRIVING!")
+                            distanceCar = Measurement(value: route.distance, unit: UnitLength.meters)
+                            etaCar = "\(String(format: "%.0f", round(route.expectedTravelTime / 60))) min"
+                        }
+                    }
+                    
+                    self.directionsInfos = self.formatDistancesAndEtas(distanceWalking: distanceWalking, etaWalking: etaWalking, distanceCar: distanceCar, etaCar: etaCar)
+                    
+                    if error != nil && returnAddressIfFailure {
+                        self.directionsInfos = parking.getFormattedAddress()
+                    }
                 }
             }
-            if (res != "") {
-                directionsInfos = res
+        } else {
+            if (returnAddressIfFailure) {
+                directionsInfos = parking.getFormattedAddress()
             }
         }
+    }
+    
+    func formatDistancesAndEtas(distanceWalking: Measurement<UnitLength>?, etaWalking: String?, distanceCar: Measurement<UnitLength>?, etaCar: String?) -> String {
+        var walking: String? = nil
+        if (distanceWalking != nil && etaWalking != nil) {
+            walking = "🚶‍♂️ \(distanceWalking?.formatted() ?? "") • \(etaWalking!)"
+        }
         
-        directionsInfos = parking.getFormattedAddress()
+        var car: String? = nil
+        if (distanceCar != nil && etaCar != nil) {
+            car = "🚙 \(distanceCar?.formatted() ?? "") • \(etaCar!)"
+        }
+        
+        if car != nil && walking != nil {
+            return "\(car!)\n\(walking!)"
+        }
+        
+        if car != nil && walking == nil {
+            return "\(car!)"
+        }
+        
+        if car == nil && walking != nil {
+            return "\(walking!)"
+        }
+        
+        return ""
     }
 }

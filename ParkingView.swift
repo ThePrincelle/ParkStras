@@ -10,10 +10,13 @@ import MapKit
 
 struct ParkingView: View {
     var parking: Parking
+    var sourcePosition: Position?
     
     @StateObject private var navigate: Navigate = Navigate()
     
     @State private var region: MKCoordinateRegion = Constants.REGIONS["strasbourg"]!
+    
+    @StateObject var directions: Directions = Directions()
     
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 //
@@ -133,8 +136,15 @@ struct ParkingView: View {
                         }
                     }
                 )
-                .frame(width: .infinity, height: 150)
+                .frame(height: 160)
                 .cornerRadius(15)
+                
+                if (sourcePosition != nil || directions.directionsInfos != "") {
+                    Text(directions.directionsInfos)
+                        .font(.subheadline).padding(.top, 1).onAppear {
+                            directions.getDirectionsInfos(parking: parking, sourcePosition: sourcePosition, returnAddressIfFailure: false)
+                        }
+                }
             }
             
             
