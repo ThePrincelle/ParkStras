@@ -23,11 +23,11 @@ struct ParkingList: View {
     
     var body: some View {
         NavigationView {
-            if (loading || (parkings.isEmpty && vm.searchText == "")) {
+            if (loading) {
                 VStack(alignment: .center, spacing: 0) {
                     Text("👀").padding(.bottom, 1.8).font(.largeTitle)
                     Text("Chargement en cours...").font(Font.caption).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 0.3)
-                    Text("Nous cherchons les parkings autour de \(vm.searchText == "" ? "votre position" : "l'emplacement que vous avez sélectionné").").font(Font.caption2).padding(.horizontal, 5.0).frame(maxWidth: 365, alignment: .center).multilineTextAlignment(.center)
+                    Text("Nous cherchons les parkings autour de \(manualPosition == nil ? "votre position" : "l'emplacement que vous avez sélectionné").").font(Font.caption2).padding(.horizontal, 5.0).frame(maxWidth: 365, alignment: .center).multilineTextAlignment(.center)
                 }
             } else {
                 VStack {
@@ -124,13 +124,13 @@ struct ParkingList: View {
                                 if parkings.count <= 4 && parkings.count > 0 {
                                     Text("🤔").padding(.bottom, 1.8).font(.largeTitle)
                                     Text("Peu de parkings sont référencés autour de vous...").font(Font.caption).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 0.3)
-                                    Text("Essayez d'élargir votre périmètre de recherche dans les préférences de l'application.").font(Font.caption2).padding(.horizontal, 5.0).frame(maxWidth: 365, alignment: .center).multilineTextAlignment(.center)
+                                    Text("Essayez d'élargir votre périmètre de recherche dans les préférences de l'application\(manualPosition == nil ? "" : ", ou de changer l'emplacement que vous avez sélectionné").").font(Font.caption2).padding(.horizontal, 5.0).frame(maxWidth: 365, alignment: .center).multilineTextAlignment(.center)
                                 }
                                 
                                 if (parkings.count == 0) {
                                     Text("🧐").padding(.bottom, 1.8).font(.largeTitle)
                                     Text("Aucun parking n'est référencé autour de vous....").font(Font.caption).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 0.3)
-                                    Text("Essayez d'élargir votre périmètre de recherche dans les préférences de l'application.").font(Font.caption2).padding(.horizontal, 5.0).frame(maxWidth: 365, alignment: .center).multilineTextAlignment(.center)
+                                    Text("Essayez d'élargir votre périmètre de recherche dans les préférences de l'application\(manualPosition == nil ? "" : ", ou de changer l'emplacement que vous avez sélectionné").").font(Font.caption2).padding(.horizontal, 5.0).frame(maxWidth: 365, alignment: .center).multilineTextAlignment(.center)
                                 }
                             }.padding(.bottom, 24.0)
                         }
