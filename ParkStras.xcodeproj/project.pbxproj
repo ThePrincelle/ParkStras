@@ -19,6 +19,9 @@
 		AB94CC7827DCFB6F00B746F1 /* ParkStrasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94CC6827DCFB6D00B746F1 /* ParkStrasApp.swift */; };
 		AB94CC7A27DCFB6F00B746F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94CC6927DCFB6D00B746F1 /* ContentView.swift */; };
 		AB94CC7C27DCFB6F00B746F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB94CC6A27DCFB6F00B746F1 /* Assets.xcassets */; };
+		ABEE53F72897DB5000F34E34 /* EtatComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEE53F62897DB5000F34E34 /* EtatComponent.swift */; };
+		ABEE53F92897E88400F34E34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEE53F82897E88400F34E34 /* LocationManager.swift */; };
+		ABEE53FC28987F7D00F34E34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEE53FB28987F7D00F34E34 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,11 @@
 		AB94CC6927DCFB6D00B746F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AB94CC6A27DCFB6F00B746F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB94CC6F27DCFB6F00B746F1 /* ParkStras.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParkStras.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABEE53F62897DB5000F34E34 /* EtatComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtatComponent.swift; sourceTree = "<group>"; };
+		ABEE53F82897E88400F34E34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		ABEE53FA2898655C00F34E34 /* Parking Rives de l'Aar - Strasbourg.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Parking Rives de l'Aar - Strasbourg.gpx"; sourceTree = "<group>"; };
+		ABEE53FB28987F7D00F34E34 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ABEE53FE2898887E00F34E34 /* Numesia - Strasbourg.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Numesia - Strasbourg.gpx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,10 @@
 		AB94CC6227DCFB6D00B746F1 = {
 			isa = PBXGroup;
 			children = (
+				ABEE53FB28987F7D00F34E34 /* Constants.swift */,
+				ABEE53FD2898860800F34E34 /* TestLocations */,
+				ABEE53F82897E88400F34E34 /* LocationManager.swift */,
+				ABEE53F62897DB5000F34E34 /* EtatComponent.swift */,
 				AB8B564327DE751C006F723B /* SettingsView.swift */,
 				AB8B564127DE728E006F723B /* MapView.swift */,
 				AB8B563D27DE7154006F723B /* ParkStras--iOS--Info.plist */,
@@ -86,12 +98,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		ABEE53FD2898860800F34E34 /* TestLocations */ = {
+			isa = PBXGroup;
+			children = (
+				ABEE53FE2898887E00F34E34 /* Numesia - Strasbourg.gpx */,
+				ABEE53FA2898655C00F34E34 /* Parking Rives de l'Aar - Strasbourg.gpx */,
+			);
+			path = TestLocations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AB94CC6E27DCFB6F00B746F1 /* ParkStras (iOS) */ = {
+		AB94CC6E27DCFB6F00B746F1 /* ParkStras */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB94CC8027DCFB6F00B746F1 /* Build configuration list for PBXNativeTarget "ParkStras (iOS)" */;
+			buildConfigurationList = AB94CC8027DCFB6F00B746F1 /* Build configuration list for PBXNativeTarget "ParkStras" */;
 			buildPhases = (
 				AB94CC6B27DCFB6F00B746F1 /* Sources */,
 				AB94CC6C27DCFB6F00B746F1 /* Frameworks */,
@@ -101,7 +122,7 @@
 			);
 			dependencies = (
 			);
-			name = "ParkStras (iOS)";
+			name = ParkStras;
 			productName = "ParkStras (iOS)";
 			productReference = AB94CC6F27DCFB6F00B746F1 /* ParkStras.app */;
 			productType = "com.apple.product-type.application";
@@ -113,8 +134,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					AB94CC6E27DCFB6F00B746F1 = {
 						CreatedOnToolsVersion = 13.3;
@@ -134,7 +155,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AB94CC6E27DCFB6F00B746F1 /* ParkStras (iOS) */,
+				AB94CC6E27DCFB6F00B746F1 /* ParkStras */,
 			);
 		};
 /* End PBXProject section */
@@ -162,7 +183,10 @@
 				AB8B563627DE3074006F723B /* ParkingView.swift in Sources */,
 				AB8B564427DE751C006F723B /* SettingsView.swift in Sources */,
 				AB94CC7827DCFB6F00B746F1 /* ParkStrasApp.swift in Sources */,
+				ABEE53FC28987F7D00F34E34 /* Constants.swift in Sources */,
 				AB8B563827DE4226006F723B /* ParkingRow.swift in Sources */,
+				ABEE53F72897DB5000F34E34 /* EtatComponent.swift in Sources */,
+				ABEE53F92897E88400F34E34 /* LocationManager.swift in Sources */,
 				AB8B564227DE728E006F723B /* MapView.swift in Sources */,
 				AB8B563A27DE6A3D006F723B /* ProgressBar.swift in Sources */,
 			);
@@ -204,6 +228,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -262,6 +287,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -291,6 +317,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ParkStras--iOS--Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = ParkStras;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette app utilise votre position pour afficher les parkings les plus proches de vous.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -306,6 +334,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.princelle.ParkStras;
 				PRODUCT_NAME = ParkStras;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -323,6 +354,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ParkStras--iOS--Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = ParkStras;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette app utilise votre position pour afficher les parkings les plus proches de vous.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -338,6 +371,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.princelle.ParkStras;
 				PRODUCT_NAME = ParkStras;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -357,7 +393,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB94CC8027DCFB6F00B746F1 /* Build configuration list for PBXNativeTarget "ParkStras (iOS)" */ = {
+		AB94CC8027DCFB6F00B746F1 /* Build configuration list for PBXNativeTarget "ParkStras" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AB94CC8127DCFB6F00B746F1 /* Debug */,

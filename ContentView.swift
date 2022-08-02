@@ -6,36 +6,41 @@
 //
 
 import SwiftUI
-import MapKit
 
 struct ContentView: View {
     @EnvironmentObject var network: Network
     
+    @StateObject var locationManager = LocationManager()
+
     var body: some View {
         TabView {
-            ParkingList(parkings: network.parkings)
-            .onAppear {
-                network.getParkings()
-            }
-            .tabItem {
-                Image(systemName: "list.bullet.circle")
-                Text("Liste")
-            }
+            ParkingList(parkings: network.parkings, network: network, locationManager: locationManager, loading: network.loading)
+                //.padding(.top, 5)
+                .onAppear {
+                    locationManager.setNetwork(network: network)
+                    locationManager.updateLocationAndParkings()
+                    // network.getParkings()
+                    network.getAllParkings()
+                }
+                .tabItem {
+                    Image(systemName: "list.bullet.circle")
+                    Text("Liste")
+                }
             
-            MapView(parkings: network.parkings)
-            .onAppear {
-                network.getParkings()
-            }
-            .tabItem {
-                Image(systemName: "map.circle")
-                Text("Carte")
-            }
+            MapView(parkings: network.allParkings, position: locationManager.lastUserPosition)
+                .onAppear {
+                    network.getAllParkings()
+                }
+                .tabItem {
+                    Image(systemName: "map.circle")
+                    Text("Carte")
+                }
             
             SettingsView()
-            .tabItem {
-                Image(systemName: "gearshape.fill")
-                Text("Préférences")
-            }
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("Préférences")
+                }
         }
     }
     

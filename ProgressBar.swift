@@ -9,23 +9,48 @@ import SwiftUI
 
 struct ProgressBar: View {
     var progress: Double
+    var showText: Bool = false
     
     var body: some View {
-        ZStack {
-            Circle()
-                .stroke(lineWidth: 8.0)
-                .opacity(0.3)
-                .foregroundColor(getColor(progress: progress))
-            
-            Circle()
-                .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
-                .foregroundColor(getColor(progress: progress))
-                .rotationEffect(Angle(degrees: 270.0))
-                .animation(/*@START_MENU_TOKEN@*/.linear/*@END_MENU_TOKEN@*/, value: 1)
-
-            Text(String(format: "%.0f%%", min(self.progress, 1.0)*100.0))
-                .font(.caption)
+        if (showText) {
+            ZStack {
+                Circle()
+                    .stroke(lineWidth: 8.0)
+                    .opacity(0.3)
+                    .foregroundColor(getColor(progress: progress))
+                
+                Circle()
+                    .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
+                    .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
+                    .foregroundColor(getColor(progress: progress))
+                    .rotationEffect(Angle(degrees: 270.0))
+                    .animation(/*@START_MENU_TOKEN@*/.linear/*@END_MENU_TOKEN@*/, value: 1)
+                
+                if (self.progress == 1) {
+                    Text("Plein")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                } else {
+                    Text(String(format: "%.0f%%", min(self.progress, 1.0)*100.0))
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+            }
+        } else {
+            VStack(spacing: 0) {
+                ZStack {
+                    Circle().foregroundColor(.white).shadow(radius: 5)
+                    Image(systemName: "mappin.circle.fill")
+                        .font(.title)
+                        .scaledToFit()
+                        .foregroundColor(getColor(progress: progress))
+                }
+                
+                Image(systemName: "arrowtriangle.down.fill")
+                    .font(.caption)
+                    .foregroundColor(getColor(progress: progress))
+                    .offset(x: 0, y: -5)
+            }
         }
     }
 }
@@ -35,11 +60,11 @@ func getColor(progress: Double) -> Color {
         return Color.red
     }
     
-    if (progress >= 0.7) {
+    if (progress >= 0.75) {
         return Color.orange
     }
     
-    if (progress >= 0.6) {
+    if (progress >= 0.65) {
         return Color.yellow
     }
     
@@ -48,7 +73,17 @@ func getColor(progress: Double) -> Color {
 
 struct ProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        ProgressBar(progress: 0.7543)
-            .frame(width: 40.0, height: 40.0)
+        VStack(spacing: 90) {
+            ProgressBar(progress: 0.7543, showText: true)
+                .frame(width: 40.0, height: 40.0)
+            
+            ProgressBar(progress: 1, showText: true)
+                .frame(width: 40.0, height: 40.0)
+            
+            VStack {
+                ProgressBar(progress: 0.7543)
+                    .frame(width: 40.0, height: 40.0)
+            }.background(.gray)
+        }
     }
 }

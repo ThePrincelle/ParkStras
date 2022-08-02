@@ -10,6 +10,8 @@ import MapKit
 
 struct MapView: View {
     var parkings: [Parking] = []
+    var position: Position?
+    
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 48.5734053,
@@ -22,22 +24,46 @@ struct MapView: View {
     )
 
     var body: some View {
-        Map(
-            coordinateRegion: $region,
-            annotationItems: parkings,
-            annotationContent: { parking in
-                MapMarker(
-                    coordinate: CLLocationCoordinate2D(
-                        latitude: parking.position.lat, longitude: parking.position.lng
-                    ), tint: .blue)
-            }
-        )
-            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.top/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Map(
+                coordinateRegion: $region,
+                showsUserLocation: true,
+                annotationItems: parkings,
+                annotationContent: { parking in
+                    MapAnnotation(
+                        coordinate: parking.position.getCLLocationCoordinate2D(),
+                        anchorPoint: CGPoint(x: 0.5, y: 0.7)
+                    ) {
+                        NavigationLink(destination: ParkingView(parking: parking)) {
+                            if parking.occupation != nil {
+                                ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: false).frame(width: 25, height: 25).padding(.trailing, 5.0)
+                            } else {
+                                VStack(spacing: 0) {
+                                    ZStack {
+                                        Circle().foregroundColor(.white).shadow(radius: 5)
+                                        Image(systemName: "mappin.circle.fill")
+                                            .font(.title)
+                                            .scaledToFit()
+                                            .foregroundColor(.teal)
+                                    }
+                                    
+                                    Image(systemName: "arrowtriangle.down.fill")
+                                        .font(.caption)
+                                        .foregroundColor(.teal)
+                                        .offset(x: 0, y: -5)
+                                }
+                            }
+                        }
+                    }
+                }
+            )
+            .edgesIgnoringSafeArea(.top)
+        }
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(parkings: [Parking()])
+        MapView(parkings: [Parking.init()])
     }
 }
