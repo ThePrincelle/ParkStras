@@ -19,6 +19,9 @@
 		AB94CC7827DCFB6F00B746F1 /* ParkStrasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94CC6827DCFB6D00B746F1 /* ParkStrasApp.swift */; };
 		AB94CC7A27DCFB6F00B746F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94CC6927DCFB6D00B746F1 /* ContentView.swift */; };
 		AB94CC7C27DCFB6F00B746F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB94CC6A27DCFB6F00B746F1 /* Assets.xcassets */; };
+		ABB604D22899193600253EA1 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB604D12899193600253EA1 /* SearchResultsViewModel.swift */; };
+		ABB604D428991E7B00253EA1 /* Navigate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB604D328991E7B00253EA1 /* Navigate.swift */; };
+		ABB604D628993F0A00253EA1 /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB604D528993F0A00253EA1 /* Directions.swift */; };
 		ABEE53F72897DB5000F34E34 /* EtatComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEE53F62897DB5000F34E34 /* EtatComponent.swift */; };
 		ABEE53F92897E88400F34E34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEE53F82897E88400F34E34 /* LocationManager.swift */; };
 		ABEE53FC28987F7D00F34E34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEE53FB28987F7D00F34E34 /* Constants.swift */; };
@@ -39,6 +42,9 @@
 		AB94CC6927DCFB6D00B746F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AB94CC6A27DCFB6F00B746F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB94CC6F27DCFB6F00B746F1 /* ParkStras.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParkStras.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB604D12899193600253EA1 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
+		ABB604D328991E7B00253EA1 /* Navigate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigate.swift; sourceTree = "<group>"; };
+		ABB604D528993F0A00253EA1 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
 		ABEE53F62897DB5000F34E34 /* EtatComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtatComponent.swift; sourceTree = "<group>"; };
 		ABEE53F82897E88400F34E34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		ABEE53FA2898655C00F34E34 /* Parking Rives de l'Aar - Strasbourg.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Parking Rives de l'Aar - Strasbourg.gpx"; sourceTree = "<group>"; };
@@ -69,6 +75,9 @@
 		AB94CC6227DCFB6D00B746F1 = {
 			isa = PBXGroup;
 			children = (
+				ABB604D528993F0A00253EA1 /* Directions.swift */,
+				ABB604D328991E7B00253EA1 /* Navigate.swift */,
+				ABB604D02899191B00253EA1 /* Search */,
 				ABEE53FB28987F7D00F34E34 /* Constants.swift */,
 				ABEE53FD2898860800F34E34 /* TestLocations */,
 				ABEE53F82897E88400F34E34 /* LocationManager.swift */,
@@ -96,6 +105,14 @@
 				AB94CC6F27DCFB6F00B746F1 /* ParkStras.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ABB604D02899191B00253EA1 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				ABB604D12899193600253EA1 /* SearchResultsViewModel.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		ABEE53FD2898860800F34E34 /* TestLocations */ = {
@@ -179,6 +196,7 @@
 				AB8B563427DE2D12006F723B /* Parking.swift in Sources */,
 				AB94CC7A27DCFB6F00B746F1 /* ContentView.swift in Sources */,
 				AB8B563C27DE6FA5006F723B /* ParkingList.swift in Sources */,
+				ABB604D428991E7B00253EA1 /* Navigate.swift in Sources */,
 				AB8B563227DE2CE7006F723B /* Network.swift in Sources */,
 				AB8B563627DE3074006F723B /* ParkingView.swift in Sources */,
 				AB8B564427DE751C006F723B /* SettingsView.swift in Sources */,
@@ -187,8 +205,10 @@
 				AB8B563827DE4226006F723B /* ParkingRow.swift in Sources */,
 				ABEE53F72897DB5000F34E34 /* EtatComponent.swift in Sources */,
 				ABEE53F92897E88400F34E34 /* LocationManager.swift in Sources */,
+				ABB604D22899193600253EA1 /* SearchResultsViewModel.swift in Sources */,
 				AB8B564227DE728E006F723B /* MapView.swift in Sources */,
 				AB8B563A27DE6A3D006F723B /* ProgressBar.swift in Sources */,
+				ABB604D628993F0A00253EA1 /* Directions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

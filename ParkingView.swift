@@ -11,70 +11,20 @@ import MapKit
 struct ParkingView: View {
     var parking: Parking
     
-    @State private var showNavigateOptions: Bool = false
-    @State private var showInvalidAddress: Bool = false
+    @StateObject private var navigate: Navigate = Navigate()
     
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(
-            latitude: 48.5734053,
-            longitude: 7.7521113
-        ),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0.0035,
-            longitudeDelta: 0.0035
-        )
-    )
+    @State private var region: MKCoordinateRegion = Constants.REGIONS["strasbourg"]!
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
-    var backButton : some View { Button(action: {
-        self.presentationMode.wrappedValue.dismiss()
-        }) {
-            Image(systemName: "chevron.backward.circle")
-                .aspectRatio(contentMode: .fit)
-                .foregroundColor(.accentColor)
-        }
-    }
-    
-    func navigateToParking() {
-        print("Navigate to Parking")
-        print(parking.address)
-        showNavigateOptions = true
-    }
-    
-    func buildUrl(scheme: String, host: String, path: String = "/", query: String) -> URLComponents {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = scheme
-        urlComponents.host = host
-        urlComponents.path = path
-        urlComponents.queryItems = [URLQueryItem(name: "q", value: query)]
-        return urlComponents
-    }
-    
-    func goToAppleMaps() {
-        print("Go to Apple Maps")
-        let url = buildUrl(scheme: "https", host: "maps.apple.com", query: (parking.name + " " + parking.address)).url
-        if url != nil {
-            UIApplication.shared.open(url!)
-        } else {
-            showInvalidAddress = true
-        }
-    }
-    
-    func hasGoogleMaps() -> Bool {
-        return UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://?q=cupertino")!)
-    }
-    
-    func goToGoogleMaps() {
-        print("Go to Google Maps")
-        print("comgooglemaps://?q=\(parking.address)")
-        let url = buildUrl(scheme: "comgooglemaps", host: "", path: "", query: (parking.name + " " + parking.address)).url
-        if url != nil {
-            UIApplication.shared.open(url!)
-        } else {
-            showInvalidAddress = true
-        }
-    }
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+//
+//    var backButton : some View { Button(action: {
+//        self.presentationMode.wrappedValue.dismiss()
+//        }) {
+//            Image(systemName: "chevron.backward.circle")
+//                .aspectRatio(contentMode: .fit)
+//                .foregroundColor(.accentColor)
+//        }
+//    }
     
     var body: some View {
         ScrollView {
@@ -108,7 +58,6 @@ struct ParkingView: View {
                 }
             }
             
-            
             GroupBox(label: Text("Adresse")) {
                 HStack {
                     let text = parking.address.components(separatedBy: "67").joined(separator: "\n67")
@@ -117,7 +66,7 @@ struct ParkingView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.subheadline)
                         
-                    Button(action: navigateToParking) {
+                    Button(action: {navigate.navigateToParking(parking: parking)}) {
                         Label(
                             title: {
                                 Text("Naviguer")
@@ -133,16 +82,21 @@ struct ParkingView: View {
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 6))
-                    }.confirmationDialog("Naviguer vers : \(parking.name) ?", isPresented: $showNavigateOptions, titleVisibility: .visible) {
+                    }.confirmationDialog("Naviguer vers : \(parking.name) ?", isPresented: $navigate.showNavigationOptions, titleVisibility: .visible) {
                         Button("Utiliser Apple Maps") {
-                            goToAppleMaps()
+                            navigate.goToAppleMaps()
                         }
-                        if (hasGoogleMaps()) {
+                        if (navigate.hasGoogleMaps()) {
                             Button("Utiliser Google Maps") {
-                                goToGoogleMaps()
+                                navigate.goToGoogleMaps()
                             }
                         }
-                    }.alert("L'adresse : \(parking.address) est invalide.", isPresented: $showInvalidAddress) {
+                        if (navigate.hasWaze()) {
+                            Button("Utiliser Waze") {
+                                navigate.goToWaze()
+                            }
+                        }
+                    }.alert("L'adresse : \(parking.address) est invalide.", isPresented: $navigate.showInvalidAddress) {
                         Button("OK", role: .cancel) { }
                     }
                 }
@@ -187,8 +141,8 @@ struct ParkingView: View {
         }
         .padding(.horizontal)
         .navigationBarTitle(parking.name, displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
+        //.navigationBarBackButtonHidden(true)
+        //.navigationBarItems(leading: backButton)
         .onAppear {
             print(parking.position.getRegion())
             self.region = parking.position.getRegion()

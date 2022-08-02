@@ -11,9 +11,16 @@ import SwiftUI
 struct ParkStrasApp: App {
     var network = Network()
     
+    @StateObject var locationManager = LocationManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(network)
+            ContentView(locationManager: locationManager).environmentObject(network).onAppear {
+                locationManager.setNetwork(network: network)
+                locationManager.updateLocationAndParkings()
+                // network.getParkings()
+                network.getAllParkings()
+            }
         }
     }
 }

@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct ParkingRow: View {
-    var parking: Parking;
+    var parking: Parking
+    var locationManager: LocationManager?
+    
+    @StateObject var directions: Directions = Directions()
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("\(parking.name)")
+                Text("**\(parking.name)**")
                     .font(.headline)
-                    .fontWeight(.medium)
+                    .padding(.bottom, 0.1)
                 
-                let text = parking.address.components(separatedBy: "67").joined(separator: "\n67")
-                Text("\(text)")
-                    .font(.subheadline)
-                    .fontWeight(.light)
+                if (locationManager != nil && locationManager?.lastUserPosition != nil) {
+                    Text(directions.directionsInfos != "" ? directions.directionsInfos : parking.getFormattedAddress())
+                        .font(.subheadline).onAppear {
+                            directions.getDirectionsInfos(parking: parking, lastUserPosition: locationManager?.lastUserPosition)
+                        }
+                } else {
+                    Text("\(parking.getFormattedAddress())")
+                        .font(.subheadline)
+                }
             }
             
             Spacer()

@@ -9,28 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var network: Network
-    
-    @StateObject var locationManager = LocationManager()
+    var locationManager: LocationManager
 
     var body: some View {
         TabView {
             ParkingList(parkings: network.parkings, network: network, locationManager: locationManager, loading: network.loading)
-                //.padding(.top, 5)
-                .onAppear {
-                    locationManager.setNetwork(network: network)
-                    locationManager.updateLocationAndParkings()
-                    // network.getParkings()
-                    network.getAllParkings()
-                }
                 .tabItem {
                     Image(systemName: "list.bullet.circle")
                     Text("Liste")
                 }
             
             MapView(parkings: network.allParkings, position: locationManager.lastUserPosition)
-                .onAppear {
-                    network.getAllParkings()
-                }
                 .tabItem {
                     Image(systemName: "map.circle")
                     Text("Carte")
@@ -46,9 +35,3 @@ struct ContentView: View {
     
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(Network())
-    }
-}

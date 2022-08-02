@@ -84,6 +84,10 @@ struct Parking: Decodable, Identifiable, Equatable {
     static func == (lhs: Parking, rhs: Parking) -> Bool {
         return lhs.id == rhs.id && lhs.position == rhs.position && lhs.name == lhs.name
     }
+    
+    func getFormattedAddress() -> String {
+        return self.address.components(separatedBy: "67").joined(separator: "\n67")
+    }
 }
 
 enum Etat {
@@ -109,6 +113,7 @@ struct Occupation: Decodable {
 // MARK: - Position
 struct Position: Decodable, Equatable {
     var lat, lng: Double
+    var adresse: String?
     
     init(lat: Double, lng: Double) {
         self.lat = lat
