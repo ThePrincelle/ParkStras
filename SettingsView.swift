@@ -58,7 +58,7 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section(
-                    header: Text("Rayon de recherche").padding(.top, 9),
+                    header: Text("Rayon de recherche").padding(.top, 8),
                     footer: Text("Réglez le périmètre de recherche en fonction de votre position.")
                 ) {
                     Slider(
@@ -75,7 +75,7 @@ struct SettingsView: View {
                 }
                 
                 Section(
-                    header: Text("Vie privée").padding(.top, 15)
+                    header: Text("Vie privée").padding(.top, 12)
                 ) {
                     HStack(spacing: 10) {
                         Image(systemName: "hand.raised.circle").font(.title)
@@ -124,7 +124,7 @@ struct SettingsView: View {
                         }
                     }
                 }
-            }.navigationTitle("Paramètres").navigationBarTitleDisplayMode(.large)
+            }.navigationTitle("Préférences").navigationBarTitleDisplayMode(.large)
         }.onAppear {
             radiusSliderValue = getValue()
         }
