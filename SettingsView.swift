@@ -75,21 +75,11 @@ struct SettingsView: View {
                 }
                 
                 Section(
-                    header: Text("Crédits").padding(.top, 15)
+                    header: Text("Vie privée").padding(.top, 15)
                 ) {
-                    List(credits) {credit in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("**\(credit.name)**").font(.caption)
-                                Text(credit.whatfor).font(.caption2)
-                            }
-                            Spacer()
-                            Link(destination: URL(string: "\(credit.link)")!) {
-                                Image(systemName: "link")
-                            }
-                        }.onTapGesture {
-                            openURL(URL(string: "\(credit.link)")!)
-                        }
+                    HStack(spacing: 10) {
+                        Image(systemName: "hand.raised.circle").font(.title)
+                        Text("Cette application et les APIs utilisées par cette dernière ne collectent aucune de vos données personnelles, votre position géographique est envoyée de manière anonyme.").font(.caption2)
                     }
                 }
                 
@@ -117,11 +107,21 @@ struct SettingsView: View {
                 }
                 
                 Section(
-                    header: Text("Vie privée")
+                    header: Text("Crédits")
                 ) {
-                    HStack(spacing: 10) {
-                        Image(systemName: "hand.raised.circle").font(.title)
-                        Text("Cette application et les APIs utilisées par cette dernière ne collectent aucune de vos données personnelles, votre position géographique est envoyée de manière anonyme.").font(.caption2)
+                    List(credits) {credit in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("**\(credit.name)**").font(.caption)
+                                Text(credit.whatfor).font(.caption2)
+                            }
+                            Spacer()
+                            Link(destination: URL(string: "\(credit.link)")!) {
+                                Image(systemName: "link")
+                            }
+                        }.onTapGesture {
+                            openURL(URL(string: "\(credit.link)")!)
+                        }
                     }
                 }
             }.navigationTitle("Paramètres").navigationBarTitleDisplayMode(.large)
