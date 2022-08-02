@@ -123,13 +123,11 @@ struct ParkingView: View {
                                             .font(.title)
                                             .scaledToFit()
                                             .foregroundColor(.teal)
-                                            .frame(width: 25, height: 25)
-                                            .padding(.trailing, 5.0)
                                     }
                                     
                                     Image(systemName: "arrowtriangle.down.fill")
                                         .font(.caption)
-                                        .foregroundColor(.red)
+                                        .foregroundColor(.teal)
                                         .offset(x: 0, y: -5)
                                 }
                             }
