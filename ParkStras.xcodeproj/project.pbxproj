@@ -338,7 +338,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ParkStras;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
 				INFOPLIST_KEY_NSLocationTemporaryUsageDescriptionDictionary = "Cette app utilise votre position pour afficher les parkings les plus proches de vous.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Cette app utilise votre position pour afficher les parkings les plus proches de vous.";
@@ -379,7 +379,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ParkStras;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
 				INFOPLIST_KEY_NSLocationTemporaryUsageDescriptionDictionary = "Cette app utilise votre position pour afficher les parkings les plus proches de vous.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Cette app utilise votre position pour afficher les parkings les plus proches de vous.";
