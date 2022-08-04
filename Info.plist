@@ -32,6 +32,12 @@
 				<string>CFBundleTypeName</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>LSHandlerRank</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+		</dict>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
