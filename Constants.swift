@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 struct Constants {
-    static let DEFAULT_RADIUS: Double = 5000 // meters
+    static let DEFAULT_RADIUS: Double = 15000 // meters
     static let RADIUS_SLIDER: RadiusSliderConf = RadiusSliderConf(range: 500...40000, step: 150)
     static let REGIONS: [String: MKCoordinateRegion] = [
         "strasbourg": MKCoordinateRegion(

@@ -137,7 +137,7 @@ struct ParkingList: View {
                     }
                 }
                 .transition(.opacity)
-                .searchable(text: $vm.searchText, prompt: "Rechercher autour d'un lieu")
+                .searchable(text: $vm.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Rechercher autour d'un lieu")
             }
         }
     }
