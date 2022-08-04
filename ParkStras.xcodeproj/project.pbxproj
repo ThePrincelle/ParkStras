@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB13D83D289C22C600506CFA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB13D83C289C22C600506CFA /* MapKit.framework */; };
 		AB8B563227DE2CE7006F723B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B563127DE2CE7006F723B /* Network.swift */; };
 		AB8B563427DE2D12006F723B /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B563327DE2D12006F723B /* Parking.swift */; };
 		AB8B563627DE3074006F723B /* ParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B563527DE3074006F723B /* ParkingView.swift */; };
 		AB8B563827DE4226006F723B /* ParkingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B563727DE4226006F723B /* ParkingRow.swift */; };
 		AB8B563A27DE6A3D006F723B /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B563927DE6A3D006F723B /* ProgressBar.swift */; };
 		AB8B563C27DE6FA5006F723B /* ParkingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B563B27DE6FA5006F723B /* ParkingList.swift */; };
-		AB8B564027DE7155006F723B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8B563F27DE7155006F723B /* MapKit.framework */; };
 		AB8B564227DE728E006F723B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B564127DE728E006F723B /* MapView.swift */; };
 		AB8B564427DE751C006F723B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B564327DE751C006F723B /* SettingsView.swift */; };
 		AB94CC7827DCFB6F00B746F1 /* ParkStrasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94CC6827DCFB6D00B746F1 /* ParkStrasApp.swift */; };
@@ -28,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB13D83C289C22C600506CFA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.0.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		AB8B563127DE2CE7006F723B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		AB8B563327DE2D12006F723B /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
 		AB8B563527DE3074006F723B /* ParkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingView.swift; sourceTree = "<group>"; };
@@ -35,7 +36,6 @@
 		AB8B563927DE6A3D006F723B /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		AB8B563B27DE6FA5006F723B /* ParkingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingList.swift; sourceTree = "<group>"; };
 		AB8B563D27DE7154006F723B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB8B563F27DE7155006F723B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.4.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		AB8B564127DE728E006F723B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		AB8B564327DE751C006F723B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AB94CC6827DCFB6D00B746F1 /* ParkStrasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkStrasApp.swift; sourceTree = "<group>"; };
@@ -57,17 +57,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB8B564027DE7155006F723B /* MapKit.framework in Frameworks */,
+				AB13D83D289C22C600506CFA /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB8B563E27DE7155006F723B /* Frameworks */ = {
+		AB13D83B289C22C600506CFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AB8B563F27DE7155006F723B /* MapKit.framework */,
+				AB13D83C289C22C600506CFA /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -95,7 +95,7 @@
 				AB8B563127DE2CE7006F723B /* Network.swift */,
 				AB8B563327DE2D12006F723B /* Parking.swift */,
 				AB94CC7027DCFB6F00B746F1 /* Products */,
-				AB8B563E27DE7155006F723B /* Frameworks */,
+				AB13D83B289C22C600506CFA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -353,7 +353,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.princelle.ParkStras;
 				PRODUCT_NAME = ParkStras;
 				SDKROOT = iphoneos;
@@ -394,7 +394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.princelle.ParkStras;
 				PRODUCT_NAME = ParkStras;
 				SDKROOT = iphoneos;

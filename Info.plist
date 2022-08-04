@@ -9,6 +9,10 @@
 			<string>MKDirectionsRequest</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.maps.directionsrequest</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleGetInfoString</key>
@@ -26,8 +30,8 @@
 	</array>
 	<key>MKDirectionsApplicationSupportedModes</key>
 	<array>
-		<string>MKDirectionsModePedestrian</string>
 		<string>MKDirectionsModeCar</string>
+		<string>MKDirectionsModePedestrian</string>
 	</array>
 </dict>
 </plist>
