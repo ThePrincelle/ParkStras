@@ -53,6 +53,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         // Handle change in authorization
         locationStatus = status
+        
+        // If user geoloacalisation is authorized, auto-update Parkings
+        if locationStatus != .denied || locationStatus != .notDetermined || locationStatus != .restricted {
+            updateLocationAndParkings()
+        }
+        
         print(#function, statusString)
     }
     
