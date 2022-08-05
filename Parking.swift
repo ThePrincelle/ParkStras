@@ -66,9 +66,6 @@ struct Parking: Decodable, Identifiable, Equatable {
         
         switch (self.etat) {
         case 0:
-            if (self.occupation?.available == 0) {
-                return Etat.FULL
-            }
             return Etat.UNKNOWN
         case 1:
             return Etat.OPEN

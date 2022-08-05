@@ -145,7 +145,12 @@ struct ParkingView: View {
                 }
             }
             
-            
+            // Description
+            if (parking.description != nil) {
+                GroupBox(label: Text("Description")) {
+                    Text(parking.description ?? "").frame(maxWidth: .infinity, alignment: .leading).padding(.top, 1.8)
+                }
+            }
         }
         .padding(.horizontal)
         .navigationBarTitle(parking.name, displayMode: .inline)
