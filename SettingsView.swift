@@ -52,7 +52,7 @@ struct SettingsView: View {
     let displayOccupationKey = "occupation_display"
     
     func setValueDisplayOccupation(to newValue: DISPLAY_OCCUPATION) {
-        preferences.set(newValue, forKey: displayOccupationKey)
+        preferences.set(newValue.rawValue, forKey: displayOccupationKey)
         preferences.synchronize()
     }
     
