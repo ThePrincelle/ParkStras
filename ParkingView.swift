@@ -56,7 +56,7 @@ struct ParkingView: View {
                             Text(String(format: "Capacité: %d places", parking.occupation?.total ?? 0))
                         }
                         Spacer()
-                        ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: true).frame(width: 55.0, height: 55.0)
+                        ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: true, parking: parking).frame(width: 55.0, height: 55.0)
                     }.frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -114,7 +114,7 @@ struct ParkingView: View {
                             anchorPoint: CGPoint(x: 0.5, y: 0.8)
                         ) {
                             if item.occupation != nil {
-                                ProgressBar(progress: (item.occupation?.percentage ?? 0) / 100, showText: false).frame(width: 25, height: 25).padding(.trailing, 5.0)
+                                ProgressBar(progress: (item.occupation?.percentage ?? 0) / 100, showText: false, parking: parking).frame(width: 25, height: 25).padding(.trailing, 5.0)
                             } else {
                                 VStack(spacing: 0) {
                                     ZStack {

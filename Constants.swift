@@ -23,6 +23,12 @@ struct Constants {
             )
         )
     ]
+    static let DEFAULT_DISPLAY_OCCUPATION: DISPLAY_OCCUPATION = DISPLAY_OCCUPATION.PERCENTAGE
+}
+
+enum DISPLAY_OCCUPATION: Int {
+    case NB_FREE_PLACES
+    case PERCENTAGE
 }
 
 struct RadiusSliderConf {

@@ -36,7 +36,7 @@ struct MapView: View {
                     ) {
                         NavigationLink(destination: ParkingView(parking: parking)) {
                             if parking.occupation != nil {
-                                ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: false).frame(width: 25, height: 25).padding(.trailing, 5.0)
+                                ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: false, parking: parking).frame(width: 25, height: 25).padding(.trailing, 5.0)
                             } else {
                                 VStack(spacing: 0) {
                                     ZStack {

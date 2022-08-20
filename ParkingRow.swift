@@ -36,7 +36,7 @@ struct ParkingRow: View {
             switch (parking.getEtat()) {
                 case Etat.OPEN:
                     if parking.occupation != nil {
-                        ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: true).frame(width: 40.0, height: 40.0).padding(.trailing, 5.0)
+                        ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: true, parking: parking).frame(width: 40.0, height: 40.0).padding(.trailing, 5.0)
                     } else {
                         EtatComponent(etat: Etat.OPEN, withText: false).font(.largeTitle).padding(.trailing, 6.0)
                     }
@@ -44,7 +44,7 @@ struct ParkingRow: View {
                     EtatComponent(etat: Etat.CLOSED, withText: false).font(.largeTitle).padding(.trailing, 6.0)
                 case Etat.FULL:
                     if parking.occupation != nil {
-                        ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: true).frame(width: 40.0, height: 40.0).padding(.trailing, 5.0)
+                        ProgressBar(progress: (parking.occupation?.percentage ?? 0) / 100, showText: true, parking: parking).frame(width: 40.0, height: 40.0).padding(.trailing, 5.0)
                     } else {
                         EtatComponent(etat: Etat.FULL, withText: false).font(.largeTitle).padding(.trailing, 6.0)
                     }

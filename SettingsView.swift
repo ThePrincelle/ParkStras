@@ -22,6 +22,7 @@ struct Credit: Identifiable {
 struct SettingsView: View {
     @Environment(\.openURL) var openURL
     @State private var radiusSliderValue: Double = Constants.DEFAULT_RADIUS
+    @State private var displayOccupationValue: DISPLAY_OCCUPATION = Constants.DEFAULT_DISPLAY_OCCUPATION
     
     var credits: [Credit] = [
         Credit(name: "Maxime Princelle", whatfor: "Développeur de l'application", link: "https://princelle.org"),
@@ -32,18 +33,35 @@ struct SettingsView: View {
     let preferences = UserDefaults.standard
     let searchRadiusKey = "radius"
 
-    //  Save to disk
-    func setValue(to newValue: Double) {
+    // Save searchRadius
+    func setValueSearchRadius(to newValue: Double) {
         preferences.set(newValue, forKey: searchRadiusKey)
         preferences.synchronize()
     }
     
-    func getValue() -> Double {
+    func getValueSearchRadius() -> Double {
         if preferences.object(forKey: searchRadiusKey) != nil {
             return preferences.double(forKey: searchRadiusKey)
         } else {
-            setValue(to: Constants.DEFAULT_RADIUS)
+            setValueSearchRadius(to: Constants.DEFAULT_RADIUS)
             return Constants.DEFAULT_RADIUS
+        }
+    }
+    
+    // Save display of occupation
+    let displayOccupationKey = "occupation_display"
+    
+    func setValueDisplayOccupation(to newValue: DISPLAY_OCCUPATION) {
+        preferences.set(newValue, forKey: displayOccupationKey)
+        preferences.synchronize()
+    }
+    
+    func getValueDisplayOccupation() -> DISPLAY_OCCUPATION {
+        if preferences.object(forKey: displayOccupationKey) != nil {
+            return DISPLAY_OCCUPATION(rawValue: preferences.integer(forKey: displayOccupationKey)) ?? Constants.DEFAULT_DISPLAY_OCCUPATION
+        } else {
+            setValueDisplayOccupation(to: Constants.DEFAULT_DISPLAY_OCCUPATION)
+            return Constants.DEFAULT_DISPLAY_OCCUPATION
         }
     }
     
@@ -70,12 +88,22 @@ struct SettingsView: View {
                     } minimumValueLabel: {
                         Text("")
                     } maximumValueLabel: {
-                        Text(Measurement(value: getValue(), unit: UnitLength.meters).formatted())
-                    }.onChange(of: radiusSliderValue, perform: setValue)
+                        Text(Measurement(value: getValueSearchRadius(), unit: UnitLength.meters).formatted())
+                    }.onChange(of: radiusSliderValue, perform: setValueSearchRadius)
                 }
                 
                 Section(
-                    header: Text("Vie privée").padding(.top, 12)
+                    header: Text("Affichage").padding(.top, 8),
+                    footer: Text("Réglez la manière dont vous souhaitez afficher certaines informations.")
+                ) {
+                    Picker(selection: $displayOccupationValue, label: Text("Occupation")) {
+                        Text("Pourcentage").tag(DISPLAY_OCCUPATION.PERCENTAGE)
+                        Text("Nombre de places libres").tag(DISPLAY_OCCUPATION.NB_FREE_PLACES)
+                    }.onChange(of: displayOccupationValue, perform: setValueDisplayOccupation)
+                }
+                
+                Section(
+                    header: Text("Vie privée").padding(.top, 8)
                 ) {
                     HStack(spacing: 10) {
                         Image(systemName: "hand.raised.circle").font(.title)
@@ -126,7 +154,8 @@ struct SettingsView: View {
                 }
             }.navigationTitle("Préférences").navigationBarTitleDisplayMode(.large)
         }.onAppear {
-            radiusSliderValue = getValue()
+            radiusSliderValue = getValueSearchRadius()
+            displayOccupationValue = getValueDisplayOccupation()
         }
     }
 }

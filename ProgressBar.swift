@@ -10,6 +10,18 @@ import SwiftUI
 struct ProgressBar: View {
     var progress: Double
     var showText: Bool = false
+    var parking: Parking
+    
+    let preferences = UserDefaults.standard
+    let displayOccupationKey = "occupation_display"
+    func getValueDisplayOccupation() -> DISPLAY_OCCUPATION {
+        if preferences.object(forKey: displayOccupationKey) != nil {
+            return DISPLAY_OCCUPATION(rawValue: preferences.integer(forKey: displayOccupationKey)) ?? Constants.DEFAULT_DISPLAY_OCCUPATION
+        } else {
+            preferences.set(Constants.DEFAULT_DISPLAY_OCCUPATION.rawValue, forKey: displayOccupationKey)
+            return Constants.DEFAULT_DISPLAY_OCCUPATION
+        }
+    }
     
     var body: some View {
         if (showText) {
@@ -31,9 +43,17 @@ struct ProgressBar: View {
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 } else {
-                    Text(String(format: "%.0f%%", min(self.progress, 1.0)*100.0))
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
+                    if (getValueDisplayOccupation() == DISPLAY_OCCUPATION.PERCENTAGE) {
+                        Text(String(format: "%.0f%%", min(self.progress, 1.0)*100.0))
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    if (getValueDisplayOccupation() == DISPLAY_OCCUPATION.NB_FREE_PLACES) {
+                        Text(String(parking.occupation?.available ?? 0))
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
         } else {
@@ -74,14 +94,14 @@ func getColor(progress: Double) -> Color {
 struct ProgressBar_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 90) {
-            ProgressBar(progress: 0.7543, showText: true)
+            ProgressBar(progress: 0.7543, showText: true, parking: Parking())
                 .frame(width: 40.0, height: 40.0)
             
-            ProgressBar(progress: 1, showText: true)
+            ProgressBar(progress: 1, showText: true, parking: Parking())
                 .frame(width: 40.0, height: 40.0)
             
             VStack {
-                ProgressBar(progress: 0.7543)
+                ProgressBar(progress: 0.7543, parking: Parking())
                     .frame(width: 40.0, height: 40.0)
             }.background(.gray)
         }
